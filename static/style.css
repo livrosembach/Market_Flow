@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=SUSE:wght@100..800&display=swap');
+
+body{
+    background-color: #fefefe;
+}
+
+h1{
+    font-family: 'SUSE', sans-serif;
+    color: #171717;
+}
+
+.form{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background-color: #fefefe;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
+    height: 75%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.formGroup{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 15%;
+}
+
+label{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+input{
+    height: 25px;
+    border: 1px solid #171717;
+    border-radius: 5px;
+}
+
+select{
+    height: 25px;
+    border: 1px solid #171717;
+    border-radius: 5px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.buttonGroup{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button{
+    width: 40%;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #2C5530;
+    color: #fefefe;
+    font-family: 'SUSE', sans-serif;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #D8D8F6;
+    color: #171717;
+}
+
+
+#productListGroup{
+    width: 50%;
+    background-color: #fefefe;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+    display: none;
+    flex-direction: column;
+    font-family: 'Raleway', sans-serif;
+
+}
+
+h2{
+    align-self: center;
+    font-family: 'SUSA', sans-serif;
+}
+
+#productListGroup button{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+ul{
+    list-style: circle;
+}

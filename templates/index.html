@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="form">
+        <form id="productForm">
+            <h1>Create Your Market List</h1>
+            <div class="formGroup">
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="formGroup">
+                <label for="aisle">Category:</label>
+                <select name="aisle" id="aisle" class="formSelect" required>
+                    <option value="1">Bebidas Alcolicas ou Refrigerantes</option>
+                    <option value="2">Água, Sucos ou Isotônicos</option>
+                    <option value="3">Utilidades para Casa ou Festa</option>
+                    <option value="4">Pets, Manutenção e Lazer</option>
+                    <option value="5">Enxoval e Papelaria</option>
+                    <option value="6">Itens de Limpeza para Banheiro e Organização</option>
+                    <option value="7">Papel Higiênico</option>
+                    <option value="8">Itens de Papel e Cuidados Infantis</option>
+                    <option value="9">Limpeza Doméstica e Detergentes</option>
+                    <option value="10">Produtos de Lavanderia</option>
+                    <option value="11">Itens de Banho e Higiene Pessoal</option>
+                    <option value="12">Guloseimas e Ingredientes Doces</option>
+                    <option value="13">Massas, Molhos e Temperos</option>
+                    <option value="14">Condimentos e Conservas</option>
+                    <option value="15">Biscoitos e Bolachas</option>
+                    <option value="16">Chás, Cafés e Complementos</option>
+                    <option value="17">Grãos e Misturas Alimentares</option>
+                    <option value="18">Leite e Itens para Café da Manhã</option>
+                    <option value="19">Salgadinhos</option>
+                    <option value="20">Farinha, Arroz e Açúcar</option>
+                    <option value="21">Carnes, Queijos, Congelados e Refrigerados</option>
+                    <option value="22">Frutas, Verduras e Legumes</option>
+                </select>
+            </div>
+            <div class="buttonGroup">
+            <button type="submit">Add Product</button>
+            <button type="button" id="viewList">View List</button>
+            </div>
+        </form>
+    
+
+    <div id="productListGroup">
+        <h2>Product List</h2>
+        <ul id="productList"></ul>
+        <div class="buttonGroup">
+            <button type="button" id="addProduct">Add Product</button>
+            <button id="copyButton">Copy to Clipboard</button>
+        </div>
+    </div>
+</div>
+
+    <script>
+        document.getElementById('productForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('/add_product', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        loadProducts();
+                    } else {
+                        alert(data.message);
+                    }
+                });
+        });
+
+
+        function loadProducts() {
+            fetch('/get_products')
+                .then(response => response.json())
+                .then(products => {
+                    const productList = document.getElementById('productList');
+                    productList.innerHTML = '';
+                    products.forEach(product => {
+                        const li = document.createElement('li');
+                        li.textContent = `${product.name}`;
+                        productList.appendChild(li);
+                    });
+                });
+        }
+
+        document.getElementById('viewList').addEventListener('click', function(){
+            document.getElementById('productListGroup').style.display = 'flex';
+            document.getElementById('productForm').style.display = 'none';
+        })
+
+        document.getElementById('addProduct').addEventListener('click', function(){
+            document.getElementById('productListGroup').style.display = 'none';
+            document.getElementById('productForm').style.display = 'flex';
+        })
+
+        document.getElementById('copyButton').addEventListener('click', function() {
+            const productList = document.getElementById('productList');
+            let textToCopy = '';
+            productList.querySelectorAll('li').forEach(li => {
+                textToCopy += li.textContent + '\n';
+            });
+
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert('Product list copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        });
+
+        // Load products on page load
+        loadProducts();
+    </script>
+</body>
+
+</html>
