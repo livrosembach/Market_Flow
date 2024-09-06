@@ -1,2 +1,2 @@
 # Projeto Lista de Mercado
- Otimizar a lista de mercado em relação a disposição do mercado
+ Ordena a lista de produtos adicionados em relação a disposição dos produtos dentro do mercado
