@@ -10,6 +10,7 @@ document.getElementById('productForm').addEventListener('submit', function (even
         .then(data => {
             if (data.status === 'success') {
                 loadProducts();
+                document.getElementById('name').value = '';
             } else {
                 alert(data.message);
             }

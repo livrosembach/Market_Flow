@@ -35,6 +35,7 @@ class Market:
     def __init__(self, name):
         self.__name = name
         self.__aisleList = [
+            Aisle(0,"Outros"),
             Aisle(1, "Bebidas Alcolicas ou Refrigerantes"),
             Aisle(2, "Água, Sucos ou Isotônicos"),
             Aisle(3, "Utilidades para Casa ou Festa"),
